@@ -20,7 +20,8 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
  *  
  */
 public class BaseFormController extends SimpleFormController {
-	private static Log log = LogFactory.getLog(BaseFormController.class);
+	
+	protected Log log = LogFactory.getLog(getClass());
 
 	private Map<Class, PropertyEditor> customPropertyEditors;
 	
