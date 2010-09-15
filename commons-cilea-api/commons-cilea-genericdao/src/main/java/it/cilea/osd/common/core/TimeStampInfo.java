@@ -1,6 +1,7 @@
 package it.cilea.osd.common.core;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -68,5 +69,23 @@ public class TimeStampInfo implements ITimeStampInfo, Serializable
     public void setInfoLastModified(SingleTimeStampInfo timestamp)
     {
         this.timestampLastModified = timestamp;
+    }
+    
+    public Date getCreationTime()
+    {
+        if (timestampCreated == null || timestampCreated.getTimestamp() == null)
+        {
+            return null;
+        }
+        return timestampCreated.getTimestamp();
+    }
+    
+    public Date getLastModificationTime()
+    {
+        if (timestampLastModified == null || timestampLastModified.getTimestamp() == null)
+        {
+            return getCreationTime();
+        }
+        return timestampCreated.getTimestamp();
     }
 }
