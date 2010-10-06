@@ -54,7 +54,7 @@ public class BaseFormAction<IA extends IPersistenceService> extends FormAction {
 	/**
 	 * Restituisce l'oggetto prelevandolo dallo Scope definito dal FormObjectScope se esistente.
 	 * Altrimenti cerca di ottenerlo dal db utilizzando, nello stesso Scope, il valore contenuto 
-	 * nella variabile il cui nome è definito dall'attributo FormObjectIDName (valorizzato di default
+	 * nella variabile il cui nome e' definito dall'attributo FormObjectIDName (valorizzato di default
 	 * a FormObjectName_id).
 	 * In caso di insuccesso si comporta di come la FormAction standard di webflow.
 	 * 
