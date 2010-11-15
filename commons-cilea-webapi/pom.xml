@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>commons-cilea</artifactId>
 		<groupId>commons-cilea</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1</version>
 	</parent>
 	<groupId>commons-cilea-webapi</groupId>
 	<artifactId>commons-cilea-webapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 
 	<dependencies>
 
@@ -58,7 +58,7 @@
 		<dependency>
 			<groupId>commons-cilea-genericdao</groupId>
 			<artifactId>commons-cilea-genericdao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 
 		<dependency>
