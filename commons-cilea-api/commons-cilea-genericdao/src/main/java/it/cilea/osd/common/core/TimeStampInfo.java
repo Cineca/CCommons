@@ -86,6 +86,6 @@ public class TimeStampInfo implements ITimeStampInfo, Serializable
         {
             return getCreationTime();
         }
-        return timestampCreated.getTimestamp();
+        return timestampLastModified.getTimestamp();
     }
 }
