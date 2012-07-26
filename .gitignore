@@ -1,4 +1,3 @@
-
 # /
 /.settings
 /.project
@@ -20,3 +19,6 @@
 /commons-cilea-webapi/.classpath
 /commons-cilea-webapi/.project
 /commons-cilea-webapi/build
+
+# MAVEN
+target/
