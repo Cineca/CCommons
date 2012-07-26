@@ -1,0 +1,22 @@
+
+# /
+/.settings
+/.project
+
+# /commons-cilea-api/
+/commons-cilea-api/.settings
+/commons-cilea-api/.project
+
+# /commons-cilea-api/commons-cilea-genericdao/
+/commons-cilea-api/commons-cilea-genericdao/.settings
+/commons-cilea-api/commons-cilea-genericdao/target
+/commons-cilea-api/commons-cilea-genericdao/.classpath
+/commons-cilea-api/commons-cilea-genericdao/.project
+/commons-cilea-api/commons-cilea-genericdao/build
+
+# /commons-cilea-webapi/
+/commons-cilea-webapi/.settings
+/commons-cilea-webapi/target
+/commons-cilea-webapi/.classpath
+/commons-cilea-webapi/.project
+/commons-cilea-webapi/build
