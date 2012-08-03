@@ -50,11 +50,55 @@
 			<artifactId>commons-lang</artifactId>
 
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
+	
+				<dependency>
+				<artifactId>spring-core</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
 
-		</dependency>
+			<dependency>
+				<artifactId>spring-beans</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-aop</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-context</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-tx</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-jdbc</artifactId>
+				<groupId>org.springframework</groupId>
+				
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-web</artifactId>
+				<groupId>org.springframework</groupId>
+				<version>3.0.5.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<artifactId>spring-webmvc</artifactId>
+				<groupId>org.springframework</groupId>
+				<version>3.0.5.RELEASE</version>
+			</dependency>
+	
 		<dependency>
 			<groupId>commons-cilea-genericdao</groupId>
 			<artifactId>commons-cilea-genericdao</artifactId>
@@ -67,11 +111,7 @@
 			<version>1.0.4</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>2.5.5</version>
-		</dependency>
+	
 
 	</dependencies>
 </project>
