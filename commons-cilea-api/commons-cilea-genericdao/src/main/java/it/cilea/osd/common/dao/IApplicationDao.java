@@ -23,4 +23,5 @@ public interface IApplicationDao  {
 	
 	public <T, PK extends Serializable> List<T> getList(Class<T> clazz,
             List<PK> allIds);
+		
 }
