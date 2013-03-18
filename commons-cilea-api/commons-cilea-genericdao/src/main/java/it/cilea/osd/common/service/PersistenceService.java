@@ -30,6 +30,8 @@ import it.cilea.osd.common.core.SingleTimeStampInfo;
 import it.cilea.osd.common.core.TimeStampInfo;
 import it.cilea.osd.common.dao.GenericDao;
 import it.cilea.osd.common.dao.PaginableObjectDao;
+import it.cilea.osd.common.listener.NativePostDeleteEventListener;
+import it.cilea.osd.common.listener.NativePostUpdateEventListener;
 import it.cilea.osd.common.model.Identifiable;
 
 import java.io.Serializable;
@@ -60,6 +62,32 @@ public abstract class PersistenceService implements IPersistenceService
      */
     protected final Log log = LogFactory.getLog(getClass());
     
+    private List<NativePostDeleteEventListener> listenerOnPostDelete;
+    
+    private List<NativePostUpdateEventListener> listenerOnPostUpdate;
+    
+    public List<NativePostDeleteEventListener> getListenerOnPostDelete()
+    {
+        return listenerOnPostDelete;
+    }
+
+    public void setListenerOnPostDelete(
+            List<NativePostDeleteEventListener> listenerOnPostDelete)
+    {
+        this.listenerOnPostDelete = listenerOnPostDelete;
+    }
+
+    public List<NativePostUpdateEventListener> getListenerOnPostUpdate()
+    {
+        return listenerOnPostUpdate;
+    }
+
+    public void setListenerOnPostUpdate(
+            List<NativePostUpdateEventListener> listenerOnPostUpdate)
+    {
+        this.listenerOnPostUpdate = listenerOnPostUpdate;
+    }
+
     /**
      * Add timestamp information (creation, last update) to the object if it
      * supports them
@@ -125,7 +153,10 @@ public abstract class PersistenceService implements IPersistenceService
     	log.debug("saveOrUpdate: "+modelClassName+ " id: "+transientObject.getId());
         GenericDao<T, ?> modelDao = modelDaos.get(modelClassName);    
         Boolean creation = recordTimeStampInfo(modelClass, transientObject);
-        modelDao.saveOrUpdate(transientObject);
+        modelDao.saveOrUpdate(transientObject);        
+        for(NativePostUpdateEventListener update : listenerOnPostUpdate) {
+            update.onPostUpdate(transientObject);
+        }
         log.debug("after saveOrUpdate id: "+transientObject.getId());
      }
 
@@ -154,7 +185,11 @@ public abstract class PersistenceService implements IPersistenceService
     public <P, PK extends Serializable> void delete(Class<P> model, PK pkey)
     {
         GenericDao<P, PK> modelDao = modelDaos.get(model.getName());
-        modelDao.delete(modelDao.read(pkey));
+        P toDeleteObject = modelDao.read(pkey);
+        modelDao.delete(toDeleteObject);
+        for(NativePostDeleteEventListener delete : listenerOnPostDelete) {
+            delete.onPostDelete(toDeleteObject);
+        }
     }
 
     /**
