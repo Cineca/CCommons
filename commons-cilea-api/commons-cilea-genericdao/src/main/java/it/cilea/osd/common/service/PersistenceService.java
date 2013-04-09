@@ -35,6 +35,7 @@ import it.cilea.osd.common.listener.NativePostUpdateEventListener;
 import it.cilea.osd.common.model.Identifiable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -68,23 +69,29 @@ public abstract class PersistenceService implements IPersistenceService
     
     public List<NativePostDeleteEventListener> getListenerOnPostDelete()
     {
+        if(this.listenerOnPostDelete==null) {
+            this.listenerOnPostDelete = new ArrayList<NativePostDeleteEventListener>();
+        }
         return listenerOnPostDelete;
     }
 
     public void setListenerOnPostDelete(
             List<NativePostDeleteEventListener> listenerOnPostDelete)
-    {
+    {        
         this.listenerOnPostDelete = listenerOnPostDelete;
     }
 
     public List<NativePostUpdateEventListener> getListenerOnPostUpdate()
     {
+        if(this.listenerOnPostUpdate==null) {
+            this.listenerOnPostUpdate = new ArrayList<NativePostUpdateEventListener>();
+        }
         return listenerOnPostUpdate;
     }
 
     public void setListenerOnPostUpdate(
             List<NativePostUpdateEventListener> listenerOnPostUpdate)
-    {
+    {        
         this.listenerOnPostUpdate = listenerOnPostUpdate;
     }
 
@@ -154,7 +161,7 @@ public abstract class PersistenceService implements IPersistenceService
         GenericDao<T, ?> modelDao = modelDaos.get(modelClassName);    
         Boolean creation = recordTimeStampInfo(modelClass, transientObject);
         modelDao.saveOrUpdate(transientObject);        
-        for(NativePostUpdateEventListener update : listenerOnPostUpdate) {
+        for(NativePostUpdateEventListener update : getListenerOnPostUpdate()) {
             update.onPostUpdate(transientObject);
         }
         log.debug("after saveOrUpdate id: "+transientObject.getId());
@@ -187,7 +194,7 @@ public abstract class PersistenceService implements IPersistenceService
         GenericDao<P, PK> modelDao = modelDaos.get(model.getName());
         P toDeleteObject = modelDao.read(pkey);
         modelDao.delete(toDeleteObject);
-        for(NativePostDeleteEventListener delete : listenerOnPostDelete) {
+        for(NativePostDeleteEventListener delete : getListenerOnPostDelete()) {
             delete.onPostDelete(toDeleteObject);
         }
     }
