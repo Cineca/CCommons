@@ -87,7 +87,10 @@ public class NamedQueryIntroductionAdvisor extends DefaultIntroductionAdvisor {
 				} else if  (methodName.startsWith("singleResult")){
 					Object[] args = mi.getArguments();
 					return genericDao.executeSingleResult(mi.getMethod(), args);
-				} else {				
+				} else if (methodName.startsWith("max")){
+                    Object[] args = mi.getArguments();
+                    return genericDao.executeMax(mi.getMethod(), args);                  
+                } else {				
 					return mi.proceed();
 				}
 			}

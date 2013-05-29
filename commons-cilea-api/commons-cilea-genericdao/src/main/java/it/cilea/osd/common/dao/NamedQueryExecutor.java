@@ -26,6 +26,7 @@ package it.cilea.osd.common.dao;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -53,7 +54,7 @@ public interface NamedQueryExecutor<T> {
 
 	long executeCounter(Method method, Object[] queryArgs);
 	
-	BigDecimal executeIdFinder(Method method, Object[] queryArgs);
+	Integer executeIdFinder(Method method, Object[] queryArgs);
 	
 	T executeUnique(Method method, Object[] queryArgs);
 	
@@ -64,4 +65,6 @@ public interface NamedQueryExecutor<T> {
 	Double executeDouble(Method method, Object[] queryArgs);
 
 	T executeSingleResult(Method method, Object[] args);
+	
+	Integer executeMax(Method method, Object[] queryArgs);
 }

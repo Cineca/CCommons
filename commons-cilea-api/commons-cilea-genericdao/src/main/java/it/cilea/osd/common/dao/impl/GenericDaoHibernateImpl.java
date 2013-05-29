@@ -30,6 +30,7 @@ import it.cilea.osd.common.dao.NamedQueryExecutor;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
@@ -159,9 +160,9 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> extends
     /**
      * {@inheritDoc}
      */
-    public BigDecimal executeIdFinder(Method method, Object[] queryArgs)
+    public Integer executeIdFinder(Method method, Object[] queryArgs)
     {
-        return (BigDecimal) buildQuery(method, queryArgs).uniqueResult();
+        return (Integer) buildQuery(method, queryArgs).uniqueResult();
     }
 
     /**
@@ -252,4 +253,11 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> extends
         return (T) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public Integer executeMax(Method method, Object[] queryArgs)
+    {
+        return (Integer) buildQuery(method, queryArgs).uniqueResult();
+    }
 }
