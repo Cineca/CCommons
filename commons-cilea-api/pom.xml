@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>commons-cilea</artifactId>
-    <groupId>commons-cilea</groupId>
+    <groupId>it.cilea</groupId>
     <version>1.0</version>
   </parent>
-  <groupId>commons-cilea-api</groupId>
+  <groupId>it.cilea</groupId>
   <artifactId>commons-cilea-api</artifactId>
   <packaging>pom</packaging>
   
