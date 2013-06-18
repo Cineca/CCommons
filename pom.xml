@@ -27,10 +27,12 @@
 	<distributionManagement>
     	<repository>
         	<id>repo</id>
+        	<name>CILEA Maven Repository</name>
         	<url>https://github.com/CILEA/mvn-repo/raw/master/releases</url>
     	</repository>
     	<snapshotRepository>
         	<id>snapshot-repo</id>
+        	<name>CILEA Maven Repository</name>
         	<url>https://github.com/CILEA/mvn-repo/raw/master/snapshots</url>
     	</snapshotRepository>
 	</distributionManagement>
