@@ -73,7 +73,7 @@ public class SimpleController extends BaseAbstractController {
 		Integer objectId = Integer.valueOf(paramId);
 			
 		model.put("domainObject", applicationService.get(objectClass, objectId));		
-		return new ModelAndView(detailsView,model);
+		return new ModelAndView(getDetailsView(),model);
 	}
 
 	protected ModelAndView handleList(HttpServletRequest request) {
@@ -81,7 +81,7 @@ public class SimpleController extends BaseAbstractController {
 		
 		List<?> list = applicationService.getList(objectClass);
 		model.put("objectList", list);
-		return new ModelAndView(listView, model);
+		return new ModelAndView(getListView(), model);
 	}
 	
 	private ModelAndView handleDelete(HttpServletRequest request) {
@@ -99,8 +99,8 @@ public class SimpleController extends BaseAbstractController {
 			saveMessage(request, getText(i18nPrefix + ".notdeleted", request
 					.getLocale()));
 		
-			return new ModelAndView(errorView, model);
+			return new ModelAndView(getErrorView(), model);
 		}
-		return new ModelAndView(listView, model);
+		return new ModelAndView(getListView(), model);
 	}
 }

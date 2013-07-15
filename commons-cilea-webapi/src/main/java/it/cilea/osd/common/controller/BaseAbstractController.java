@@ -42,11 +42,11 @@ public abstract class BaseAbstractController extends AbstractController {
 
 	protected String method;
 
-	protected String detailsView;
+	private String detailsView;
 
-	protected String listView;
+	private String listView;
 
-	protected String errorView;
+	private String errorView;
 
 	public void setMethod(String method) {
 		this.method = method;
@@ -144,5 +144,15 @@ public abstract class BaseAbstractController extends AbstractController {
 	public void setErrorView(String errorView) {
 		this.errorView = errorView;
 	}
+
+    public String getDetailsView()
+    {
+        return detailsView;
+    }
+
+    public String getListView()
+    {
+        return listView;
+    }
 
 }

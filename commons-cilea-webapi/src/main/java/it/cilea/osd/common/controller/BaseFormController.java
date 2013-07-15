@@ -49,11 +49,11 @@ public class BaseFormController extends SimpleFormController {
 
 	private Map<Class, PropertyEditor> customPropertyEditors;
 	
-	protected String detailsView;
+	private String detailsView;
 
-	protected String listView;
+	private String listView;
 	
-	protected String errorView;
+	private String errorView;
 
 	public BaseFormController() {
 		super();
@@ -146,4 +146,19 @@ public class BaseFormController extends SimpleFormController {
 			Map<Class, PropertyEditor> customPropertyEditors) {
 		this.customPropertyEditors = customPropertyEditors;
 	}
+
+    public String getDetailsView()
+    {
+        return detailsView;
+    }
+
+    public String getListView()
+    {
+        return listView;
+    }
+
+    public String getErrorView()
+    {
+        return errorView;
+    }
 }
