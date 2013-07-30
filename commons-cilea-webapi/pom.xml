@@ -1,13 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>commons-cilea-webapi</artifactId>
+	<groupId>it.cilea</groupId>
+		
 	<parent>
 		<artifactId>commons-cilea</artifactId>
 		<groupId>it.cilea</groupId>
-		<version>1.1</version>
+		<version>1.2</version>
 	</parent>
-	<artifactId>commons-cilea-webapi</artifactId>
 
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
+		<org.spring.version>3.1.1.RELEASE</org.spring.version>
+	</properties>
+	
 	<dependencies>
 
 		<dependency>
@@ -20,13 +29,20 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-core</artifactId>		  
+		</dependency>		
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-commons-annotations</artifactId>		  
 		</dependency>
-
-
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-validator</artifactId>		  
+		</dependency>	
+		
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -78,13 +94,13 @@
 			<dependency>
 				<artifactId>spring-web</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<artifactId>spring-webmvc</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 	
 		<dependency>
@@ -102,5 +118,5 @@
 	
 
 	</dependencies>
-	<groupId>it.cilea</groupId>
+	
 </project>

@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>commons-cilea-api</artifactId>
 		<groupId>it.cilea</groupId>
-		<version>1.1</version>
+		<version>1.2</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.cilea</groupId>
@@ -12,21 +12,29 @@
 
 	<dependencies>
 
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-core</artifactId>		  
+		</dependency>		
+		<dependency>
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-commons-annotations</artifactId>		  
 		</dependency>
 
 		<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-ehcache</artifactId>
-				
-			</dependency>           
+		  <groupId>org.hibernate</groupId>
+		  <artifactId>hibernate-validator</artifactId>		  
+		</dependency>	
+						
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>				
+		</dependency>           
+		
 		<dependency>
 			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			
+			<artifactId>commons-logging</artifactId>			
 		</dependency>
 
 		<dependency>
