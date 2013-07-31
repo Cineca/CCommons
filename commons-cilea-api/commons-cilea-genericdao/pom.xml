@@ -15,17 +15,8 @@
 
 		<dependency>
 		  <groupId>org.hibernate</groupId>
-		  <artifactId>hibernate-core</artifactId>		  
+		  <artifactId>hibernate-entitymanager</artifactId>		  
 		</dependency>		
-		<dependency>
-		  <groupId>org.hibernate</groupId>
-		  <artifactId>hibernate-commons-annotations</artifactId>		  
-		</dependency>
-
-		<dependency>
-		  <groupId>org.hibernate</groupId>
-		  <artifactId>hibernate-validator</artifactId>		  
-		</dependency>	
 						
 		<dependency>
 			<groupId>org.hibernate</groupId>
