@@ -3,9 +3,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.cilea</groupId>
 	<artifactId>commons-cilea</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<packaging>pom</packaging>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Warning hibernate core point to 3.3.2.GA to be compliant with hibernate-annotation 3.4.0.GA (required by spring ORM 3.1.1.RELEASE)-->
+		<org.hibernate.version>3.6.10.Final</org.hibernate.version>
+		<org.spring.version>3.1.1.RELEASE</org.spring.version>
+	</properties>
+    
+    
 	<build>
 		<plugins>
 			<!-- Java 1.5 is our officially endorsed build target platform. -->
@@ -44,18 +52,30 @@
 				<artifactId>commons-collections</artifactId>
 				<version>3.2</version>
 			</dependency>
-
+	
 			<dependency>
-  				<groupId>org.hibernate</groupId>
+				<groupId>org.hibernate</groupId>
   				<artifactId>hibernate-entitymanager</artifactId>
-  				<version>3.6.10.Final</version>
-			</dependency>			
-			
+				<version>${org.hibernate.version}</version>
+			</dependency>
+        
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-ehcache</artifactId>
-				<version>3.6.10.Final</version>
+				<version>${org.hibernate.version}</version>
 			</dependency>           
+			
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>3.3.2.GA</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-annotations</artifactId>
+				<version>3.4.0.GA</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>commons-logging</groupId>
@@ -69,46 +89,46 @@
 				<version>2.2</version>
 			</dependency>
 	
-				<dependency>
+			<dependency>
 				<artifactId>spring-core</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-orm</artifactId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 			
 			<dependency>
 				<artifactId>spring-beans</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<artifactId>spring-aop</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<artifactId>spring-context</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<artifactId>spring-tx</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
 				<artifactId>spring-jdbc</artifactId>
 				<groupId>org.springframework</groupId>
-				<version>3.0.5.RELEASE</version>
+				<version>${org.spring.version}</version>
 			</dependency>
 
 			<dependency>
