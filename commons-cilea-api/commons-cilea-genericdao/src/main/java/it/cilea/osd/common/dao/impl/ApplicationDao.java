@@ -35,11 +35,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
  * {@link IApplicationDao} implementations based on Hibernate
@@ -47,81 +46,80 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @author cilea
  * 
  */
-public class ApplicationDao extends HibernateDaoSupport implements
-        IApplicationDao
-{
-    /**
-     * The Log4J logger
-     */
-    private static final Log log = LogFactory.getLog(ApplicationDao.class);
-    
-    private static final int MAX_IN_CLAUSE = 500;
-    
-    /**
-     * {@inheritDoc}
-     */
-    public void evict(Identifiable identifiable)
-    {
-        getSession().evict(identifiable);
-    }
+public class ApplicationDao implements IApplicationDao {
+	/**
+	 * The Log4J logger
+	 */
+	private static final Log log = LogFactory.getLog(ApplicationDao.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    public <T, PK extends Serializable> List<T> getList(Class<T> clazz,
-            List<PK> allIds)
-    {
-        Session session = getSession();
-        Criteria criteria = session.createCriteria(clazz);
+	private static final int MAX_IN_CLAUSE = 500;
 
-        final int maxResults = allIds.size();
-        if (maxResults == 0)
-            return null;
+	private SessionFactory sessionFactory;
 
-        int loop = maxResults / MAX_IN_CLAUSE;
-        boolean exact = maxResults % MAX_IN_CLAUSE == 0;
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
-        if (!exact)
-            loop++;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
-        Disjunction disjunction = Restrictions.disjunction();
+	/**
+	 * {@inheritDoc}
+	 */
+	public void evict(Identifiable identifiable) {
+		getSessionFactory().getCurrentSession().evict(identifiable);
+	}
 
-        for (int index = 0; index < loop; index++)
-        {
-            int max = index * MAX_IN_CLAUSE + MAX_IN_CLAUSE <= maxResults ? index
-                    * MAX_IN_CLAUSE + MAX_IN_CLAUSE
-                    : maxResults;
-            List<PK> ids = new ArrayList<PK>(max - index * MAX_IN_CLAUSE);
-            for (int entityInfoIndex = index * MAX_IN_CLAUSE; entityInfoIndex < max; entityInfoIndex++)
-            {
-                ids.add(allIds.get(entityInfoIndex));
-            }
-            disjunction.add(Restrictions.in("id", ids));
-        }
-        criteria.add(disjunction);
-        criteria.list(); // load all objects
+	/**
+	 * {@inheritDoc}
+	 */
+	public <T, PK extends Serializable> List<T> getList(Class<T> clazz,
+			List<PK> allIds) {
+		Session session = getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(clazz);
 
-        // mandatory to keep the same ordering
-        List<T> result = new ArrayList<T>(allIds.size());
-        for (PK id : allIds)
-        {
-            T element = (T) session.load(clazz, id);
-            if (Hibernate.isInitialized(element))
-            {
-                // all existing elements should have been loaded by the query,
-                // the other ones are missing ones
-                result.add(element);
-            }
-            else
-            {
-                if (log.isDebugEnabled())
-                {
-                    log.debug("Object with id: " + id + " not in database: "
-                            + clazz);
-                }
-            }
-        }
-        return result;
-    }
-   
+		final int maxResults = allIds.size();
+		if (maxResults == 0)
+			return null;
+
+		int loop = maxResults / MAX_IN_CLAUSE;
+		boolean exact = maxResults % MAX_IN_CLAUSE == 0;
+
+		if (!exact)
+			loop++;
+
+		Disjunction disjunction = Restrictions.disjunction();
+
+		for (int index = 0; index < loop; index++) {
+			int max = index * MAX_IN_CLAUSE + MAX_IN_CLAUSE <= maxResults ? index
+					* MAX_IN_CLAUSE + MAX_IN_CLAUSE
+					: maxResults;
+			List<PK> ids = new ArrayList<PK>(max - index * MAX_IN_CLAUSE);
+			for (int entityInfoIndex = index * MAX_IN_CLAUSE; entityInfoIndex < max; entityInfoIndex++) {
+				ids.add(allIds.get(entityInfoIndex));
+			}
+			disjunction.add(Restrictions.in("id", ids));
+		}
+		criteria.add(disjunction);
+		criteria.list(); // load all objects
+
+		// mandatory to keep the same ordering
+		List<T> result = new ArrayList<T>(allIds.size());
+		for (PK id : allIds) {
+			T element = (T) session.load(clazz, id);
+			if (Hibernate.isInitialized(element)) {
+				// all existing elements should have been loaded by the query,
+				// the other ones are missing ones
+				result.add(element);
+			} else {
+				if (log.isDebugEnabled()) {
+					log.debug("Object with id: " + id + " not in database: "
+							+ clazz);
+				}
+			}
+		}
+		return result;
+	}
+
 }
