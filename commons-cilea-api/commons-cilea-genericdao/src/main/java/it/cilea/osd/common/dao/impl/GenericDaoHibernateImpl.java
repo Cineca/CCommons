@@ -29,15 +29,14 @@ import it.cilea.osd.common.dao.NamedQueryExecutor;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  * <p>
@@ -53,9 +52,10 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
  * @author cilea
  * 
  */
-public class GenericDaoHibernateImpl<T, PK extends Serializable> extends
-        HibernateDaoSupport implements GenericDao<T, PK>, NamedQueryExecutor<T>
+public class GenericDaoHibernateImpl<T, PK extends Serializable> implements GenericDao<T, PK>, NamedQueryExecutor<T>
 {
+	private SessionFactory sessionFactory;
+	
     /** Logger for this class and subclasses */
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -246,7 +246,11 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> extends
         return namedQuery;
     }
 
-    public T executeSingleResult(Method method, Object[] queryArgs)
+    private Session getSession() {
+		return getSessionFactory().getCurrentSession();
+	}
+
+	public T executeSingleResult(Method method, Object[] queryArgs)
     {
         Query query = buildQuery(method, queryArgs);
         query.setMaxResults(1);
@@ -260,4 +264,12 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> extends
     {
         return (Integer) buildQuery(method, queryArgs).uniqueResult();
     }
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 }
