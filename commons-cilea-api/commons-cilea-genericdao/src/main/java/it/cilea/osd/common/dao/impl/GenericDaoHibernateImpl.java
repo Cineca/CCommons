@@ -246,10 +246,6 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements Gene
         return namedQuery;
     }
 
-    private Session getSession() {
-		return getSessionFactory().getCurrentSession();
-	}
-
 	public T executeSingleResult(Method method, Object[] queryArgs)
     {
         Query query = buildQuery(method, queryArgs);
@@ -271,5 +267,9 @@ public class GenericDaoHibernateImpl<T, PK extends Serializable> implements Gene
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	
+	private Session getSession() {
+		return getSessionFactory().getCurrentSession();
 	}
 }
