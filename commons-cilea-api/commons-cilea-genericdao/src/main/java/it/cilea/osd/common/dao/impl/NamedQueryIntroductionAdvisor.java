@@ -55,6 +55,15 @@ public class NamedQueryIntroductionAdvisor extends DefaultIntroductionAdvisor {
 				if (methodName.startsWith("find")) {
 					Object[] args = mi.getArguments();
 					return genericDao.executeFinder(mi.getMethod(), args);
+				} else if (methodName.startsWith("like")){
+					Object[] args = mi.getArguments();
+					Object[] newArgs = new Object[args.length];
+					int i = 0;
+					for(Object arg : args) {
+						newArgs[i] = "%"+((String)arg)+"%";
+						i++;
+					}
+					return genericDao.executeFinder(mi.getMethod(), newArgs);					
 				} else if (methodName.startsWith("unique")){
 					Object[] args = mi.getArguments();
 					return genericDao.executeUnique(mi.getMethod(), args);					
