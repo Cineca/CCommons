@@ -163,39 +163,46 @@ public abstract class PersistenceService implements IPersistenceService
         return modelDao.read(pkey);
     }
 
+    
     /**
      * {@inheritDoc}
      */
     public <T extends Identifiable> void saveOrUpdate(Class<T> modelClass,
             T transientObject)
     {
+    	saveOrUpdate(modelClass, transientObject, true);
+    }
+
+    
+    public <T extends Identifiable> void saveOrUpdate(Class<T> modelClass,
+            T transientObject, boolean disableListener)
+    {
         final String modelClassName = modelClass.getName();
 
         log.debug("saveOrUpdate: " + modelClassName + " id: "
                 + transientObject.getId());
         GenericDao<T, ?> modelDao = modelDaos.get(modelClassName);
-        if (transientObject.getId() == null)
-        {
-            for (NativePreInsertEventListener insert : getListenerOnPreInsert())
-            {
-                insert.onPreInsert(transientObject);
-            }
-        }
-        else {
-            for (NativePreUpdateEventListener update : getListenerOnPreUpdate())
-            {
-                update.onPreUpdate(transientObject);
-            }
-        }
+		if (disableListener) {
+			if (transientObject.getId() == null) {
+				for (NativePreInsertEventListener insert : getListenerOnPreInsert()) {
+					insert.onPreInsert(transientObject);
+				}
+			} else {
+				for (NativePreUpdateEventListener update : getListenerOnPreUpdate()) {
+					update.onPreUpdate(transientObject);
+				}
+			}
+		}
         Boolean creation = recordTimeStampInfo(modelClass, transientObject);
         modelDao.saveOrUpdate(transientObject);
-        for (NativePostUpdateEventListener update : getListenerOnPostUpdate())
-        {
-            update.onPostUpdate(transientObject);
-        }
+		if (disableListener) {
+			for (NativePostUpdateEventListener update : getListenerOnPostUpdate()) {
+				update.onPostUpdate(transientObject);
+			}
+		}
         log.debug("after saveOrUpdate id: " + transientObject.getId());
     }
-
+    
     /**
      * {@inheritDoc}
      */
