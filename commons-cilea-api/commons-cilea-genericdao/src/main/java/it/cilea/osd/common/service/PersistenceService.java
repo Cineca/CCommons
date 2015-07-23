@@ -175,14 +175,14 @@ public abstract class PersistenceService implements IPersistenceService
 
     
     public <T extends Identifiable> void saveOrUpdate(Class<T> modelClass,
-            T transientObject, boolean disableListener)
+            T transientObject, boolean listenerEnable)
     {
         final String modelClassName = modelClass.getName();
 
         log.debug("saveOrUpdate: " + modelClassName + " id: "
                 + transientObject.getId());
         GenericDao<T, ?> modelDao = modelDaos.get(modelClassName);
-		if (disableListener) {
+		if (listenerEnable) {
 			if (transientObject.getId() == null) {
 				for (NativePreInsertEventListener insert : getListenerOnPreInsert()) {
 					insert.onPreInsert(transientObject);
@@ -195,7 +195,7 @@ public abstract class PersistenceService implements IPersistenceService
 		}
         Boolean creation = recordTimeStampInfo(modelClass, transientObject);
         modelDao.saveOrUpdate(transientObject);
-		if (disableListener) {
+		if (listenerEnable) {
 			for (NativePostUpdateEventListener update : getListenerOnPostUpdate()) {
 				update.onPostUpdate(transientObject);
 			}
