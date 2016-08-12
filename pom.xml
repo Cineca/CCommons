@@ -13,9 +13,9 @@
 	</properties>
     
     <scm>
-      <connection>scm:git:https://github.com/Cineca/CCommons.git</connection>
-      <developerConnection>scm:git:https://github.com/Cineca/CCommons.git</developerConnection>
-      <url>https://github.com/Cineca/CCommons.git</url>
+      <connection>scm:git:https://github.com/4Science/CCommons.git</connection>
+      <developerConnection>scm:git:https://github.com/4Science/CCommons.git</developerConnection>
+      <url>https://github.com/4Science/CCommons.git</url>
       <tag>2.0</tag>
     </scm>
     
@@ -70,13 +70,13 @@
 	<distributionManagement>
     	<repository>
         	<id>repo</id>
-        	<name>CILEA Maven Repository</name>
-        	<url>https://github.com/Cineca/mvn-repo/raw/master/releases</url>
+        	<name>4Science Maven Repository</name>
+        	<url>https://github.com/4Science/mvn-repo/raw/master/releases</url>
     	</repository>
     	<snapshotRepository>
         	<id>snapshot-repo</id>
-        	<name>CILEA Maven Repository</name>
-        	<url>https://github.com/Cineca/mvn-repo/raw/master/snapshots</url>
+        	<name>4Science Maven Repository</name>
+        	<url>https://github.com/4Science/mvn-repo/raw/master/snapshots</url>
     	</snapshotRepository>
 	</distributionManagement>
 	
