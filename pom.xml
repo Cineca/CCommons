@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.cilea</groupId>
 	<artifactId>commons-cilea</artifactId>
-	<version>2.2</version>
+	<version>2.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -16,7 +16,7 @@
       <connection>scm:git:https://github.com/4Science/CCommons.git</connection>
       <developerConnection>scm:git:https://github.com/4Science/CCommons.git</developerConnection>
       <url>https://github.com/4Science/CCommons.git</url>
-      <tag>2.2</tag>
+      <tag>2.0</tag>
     </scm>
     
 	<build>
