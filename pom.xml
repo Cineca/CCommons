@@ -8,8 +8,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Warning hibernate core point to 3.3.2.GA to be compliant with hibernate-annotation 3.4.0.GA (required by spring ORM 3.1.1.RELEASE)-->
-		<org.hibernate.version>4.1.8.Final</org.hibernate.version>
-		<org.spring.version>3.1.1.RELEASE</org.spring.version>
+		<org.hibernate.version>4.2.21.Final</org.hibernate.version>
+		<org.spring.version>3.2.16.RELEASE</org.spring.version>
 	</properties>
     
     <scm>
@@ -103,7 +103,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>4.1.8.Final</version>
+				<version>4.2.21.Final</version>
 			</dependency>
 	
 			<dependency>
