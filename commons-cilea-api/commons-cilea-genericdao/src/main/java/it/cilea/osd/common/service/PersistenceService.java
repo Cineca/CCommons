@@ -24,18 +24,6 @@
  */
 package it.cilea.osd.common.service;
 
-import it.cilea.osd.common.core.HasTimeStampInfo;
-import it.cilea.osd.common.core.ITimeStampInfo;
-import it.cilea.osd.common.core.SingleTimeStampInfo;
-import it.cilea.osd.common.core.TimeStampInfo;
-import it.cilea.osd.common.dao.GenericDao;
-import it.cilea.osd.common.dao.PaginableObjectDao;
-import it.cilea.osd.common.listener.NativePostDeleteEventListener;
-import it.cilea.osd.common.listener.NativePostUpdateEventListener;
-import it.cilea.osd.common.listener.NativePreInsertEventListener;
-import it.cilea.osd.common.listener.NativePreUpdateEventListener;
-import it.cilea.osd.common.model.Identifiable;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,6 +32,19 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import it.cilea.osd.common.core.HasTimeStampInfo;
+import it.cilea.osd.common.core.ITimeStampInfo;
+import it.cilea.osd.common.core.SingleTimeStampInfo;
+import it.cilea.osd.common.core.TimeStampInfo;
+import it.cilea.osd.common.dao.GenericDao;
+import it.cilea.osd.common.dao.PaginableObjectDao;
+import it.cilea.osd.common.listener.NativeLoadEventListener;
+import it.cilea.osd.common.listener.NativePostDeleteEventListener;
+import it.cilea.osd.common.listener.NativePostUpdateEventListener;
+import it.cilea.osd.common.listener.NativePreInsertEventListener;
+import it.cilea.osd.common.listener.NativePreUpdateEventListener;
+import it.cilea.osd.common.model.Identifiable;
 
 /**
  * A {@link IPersistenceService} implementations based on the {@link GenericDao}
@@ -72,6 +73,22 @@ public abstract class PersistenceService implements IPersistenceService
     private List<NativePreInsertEventListener> listenerOnPreInsert;
     
     private List<NativePreUpdateEventListener> listenerOnPreUpdate;
+
+    private List<NativeLoadEventListener> listenerOnLoad;
+    
+    public List<NativeLoadEventListener> getListenerOnLoad()
+    {
+        if (this.listenerOnLoad == null)
+        {
+            this.listenerOnLoad = new ArrayList<NativeLoadEventListener>();
+        }
+        return listenerOnLoad;
+    }
+
+    public void setListenerOnLoad(List<NativeLoadEventListener> listenerOnLoad)
+    {
+        this.listenerOnLoad = listenerOnLoad;
+    }
 
     public List<NativePostDeleteEventListener> getListenerOnPostDelete()
     {
@@ -160,7 +177,13 @@ public abstract class PersistenceService implements IPersistenceService
         GenericDao<T, PK> modelDao = modelDaos.get(modelClass.getName());
         log.debug("modelClass:" + modelClass);
         log.debug("dao:" + modelDao);
-        return modelDao.read(pkey);
+        T result = modelDao.read(pkey);
+        if(result != null) {
+            for (NativeLoadEventListener update : getListenerOnLoad()) {
+                update.onLoad(result);
+            }
+        }
+        return result;
     }
 
     
