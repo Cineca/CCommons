@@ -72,16 +72,20 @@
 	</modules>
 
 	<distributionManagement>
-    	<repository>
-        	<id>repo</id>
-        	<name>4Science Maven Repository</name>
-        	<url>https://github.com/4Science/mvn-repo/raw/master/releases</url>
-    	</repository>
-    	<snapshotRepository>
-        	<id>snapshot-repo</id>
-        	<name>4Science Maven Repository</name>
-        	<url>https://github.com/4Science/mvn-repo/raw/master/snapshots</url>
-    	</snapshotRepository>
+		<repository>
+			<id>4science-nexus</id>
+			<name>4Science Public Releases</name>
+			<url>https://nexus.4science.it/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>4science-snapshot</id>
+			<name>4Science Public Snapshot</name>
+			<url>https://nexus.4science.it/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<site>
+			<id>website</id>
+			<url>https://github.com/4Science/JDynA/wiki</url>
+		</site>
 	</distributionManagement>
 	
 	<dependencyManagement>
