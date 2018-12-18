@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>commons-cilea-api</artifactId>
 		<groupId>it.cilea</groupId>
-		<version>2.5</version>
+		<version>2.6-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.cilea</groupId>
