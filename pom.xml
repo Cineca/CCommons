@@ -2,20 +2,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.cilea</groupId>
 	<artifactId>commons-cilea</artifactId>
-	<version>2.2-SNAPSHOT</version>
+	<version>2.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Warning hibernate core point to 3.3.2.GA to be compliant with hibernate-annotation 3.4.0.GA (required by spring ORM 3.1.1.RELEASE)-->
-		<org.hibernate.version>4.1.8.Final</org.hibernate.version>
-		<org.spring.version>3.1.1.RELEASE</org.spring.version>
+	    <org.hibernate.version>4.2.21.Final</org.hibernate.version>
+		<org.hibernate.ehcache.version>4.2.21.Final</org.hibernate.ehcache.version>
+		<org.hibernate.entitymanager.version>4.2.21.Final</org.hibernate.entitymanager.version>
+		<org.hibernate.annotations.version>4.0.2.Final</org.hibernate.annotations.version>
+		<org.hibernate.jpa.version>1.0.1.Final</org.hibernate.jpa.version>
+		<org.spring.version>3.2.16.RELEASE</org.spring.version>
 	</properties>
     
     <scm>
-      <connection>scm:git:https://github.com/Cineca/CCommons.git</connection>
-      <developerConnection>scm:git:https://github.com/Cineca/CCommons.git</developerConnection>
-      <url>https://github.com/Cineca/CCommons.git</url>
+      <connection>scm:git:https://github.com/4Science/CCommons.git</connection>
+      <developerConnection>scm:git:https://github.com/4Science/CCommons.git</developerConnection>
+      <url>https://github.com/4Science/CCommons.git</url>
       <tag>2.0</tag>
     </scm>
     
@@ -32,7 +36,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.1</version>
+				<version>2.5.2</version>
 				<configuration>
 					<!-- During release:perform, enable the "release" profile (see below) -->
 					<releaseProfiles>release</releaseProfiles>
@@ -68,16 +72,20 @@
 	</modules>
 
 	<distributionManagement>
-    	<repository>
-        	<id>repo</id>
-        	<name>CILEA Maven Repository</name>
-        	<url>https://github.com/Cineca/mvn-repo/raw/master/releases</url>
-    	</repository>
-    	<snapshotRepository>
-        	<id>snapshot-repo</id>
-        	<name>CILEA Maven Repository</name>
-        	<url>https://github.com/Cineca/mvn-repo/raw/master/snapshots</url>
-    	</snapshotRepository>
+		<repository>
+			<id>4science-nexus</id>
+			<name>4Science Public Releases</name>
+			<url>https://nexus.4science.it/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>4science-snapshot</id>
+			<name>4Science Public Snapshot</name>
+			<url>https://nexus.4science.it/repository/maven-snapshots/</url>
+		</snapshotRepository>
+		<site>
+			<id>website</id>
+			<url>https://github.com/4Science/JDynA/wiki</url>
+		</site>
 	</distributionManagement>
 	
 	<dependencyManagement>
@@ -97,19 +105,19 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-ehcache</artifactId>
-				<version>4.0.1.Final</version>
+				<version>${org.hibernate.ehcache.version}</version>
 			</dependency>           
 			
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>4.1.8.Final</version>
+				<version>${org.hibernate.version}</version>
 			</dependency>
 	
 			<dependency>
 				<groupId>org.hibernate.common</groupId>
 				<artifactId>hibernate-commons-annotations</artifactId>
-				<version>4.0.1.Final</version>
+				<version>${org.hibernate.annotations.version}</version>
 			</dependency>
 			
 			<dependency>
